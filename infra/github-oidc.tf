@@ -24,9 +24,13 @@ data "aws_iam_policy_document" "github_actions_assume" {
     }
 
     condition {
+      # GitHub's sub claim embeds immutable numeric IDs alongside the owner/repo
+      # names, e.g. "repo:owner@123/repo@456:ref:refs/heads/main" — not the
+      # plain "repo:owner/repo:*" shape most examples assume. Confirmed via a
+      # one-off debug workflow that printed the actual decoded token.
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.github_repo}:*"]
+      values   = ["repo:${split("/", var.github_repo)[0]}@*/${split("/", var.github_repo)[1]}@*:*"]
     }
   }
 }
