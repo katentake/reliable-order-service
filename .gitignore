@@ -6,10 +6,10 @@ build/
 
 # Terraform
 infra/**/.terraform/
-infra/**/.terraform.lock.hcl
 infra/**/*.tfstate
 infra/**/*.tfstate.*
 infra/**/*.tfvars
+infra/**/tfplan
 infra/**/crash.log
 infra/**/override.tf
 infra/**/override.tf.json
