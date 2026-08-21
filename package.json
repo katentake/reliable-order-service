@@ -1,0 +1,14 @@
+{
+  "name": "reliable-order-service",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reliable order-ingestion service for restaurants (Palona AI take-home exercise)",
+  "scripts": {
+    "build": "tsc -p app",
+    "test": "vitest run",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

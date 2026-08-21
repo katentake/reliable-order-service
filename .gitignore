@@ -1,0 +1,21 @@
+node_modules/
+dist/
+build/
+*.log
+.DS_Store
+
+# Terraform
+infra/**/.terraform/
+infra/**/.terraform.lock.hcl
+infra/**/*.tfstate
+infra/**/*.tfstate.*
+infra/**/*.tfvars
+infra/**/crash.log
+infra/**/override.tf
+infra/**/override.tf.json
+
+# Env / secrets
+.env
+.env.*
+*.pem
+*.csv
