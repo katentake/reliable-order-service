@@ -4,11 +4,26 @@
   "private": true,
   "description": "Reliable order-ingestion service for restaurants (Palona AI take-home exercise)",
   "scripts": {
-    "build": "tsc -p app",
-    "test": "vitest run",
-    "lint": "eslint ."
+    "typecheck": "tsc -p app",
+    "bundle": "esbuild app/src/handlers/submitOrder.ts app/src/handlers/getOrderStatus.ts app/src/handlers/processOrder.ts app/src/handlers/handleFailedOrder.ts --bundle --minify --platform=node --target=node20 --format=cjs --outdir=app/dist",
+    "build": "npm run typecheck && npm run bundle",
+    "test": "vitest run"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.687.0",
+    "@aws-sdk/client-sqs": "^3.687.0",
+    "@aws-sdk/lib-dynamodb": "^3.687.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/node": "^20.16.11",
+    "aws-sdk-client-mock": "^4.1.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.6.3",
+    "vitest": "^4.1.11"
   }
 }
