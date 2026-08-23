@@ -49,7 +49,7 @@ resource "aws_lambda_function" "submit_order" {
   function_name    = "${local.name_prefix}-submit-order"
   role             = aws_iam_role.submit_order.arn
   handler          = "submitOrder.handler"
-  runtime          = "nodejs20.x"
+  runtime          = "nodejs22.x"
   filename         = data.archive_file.submit_order.output_path
   source_code_hash = data.archive_file.submit_order.output_base64sha256
   timeout          = 10
@@ -73,7 +73,7 @@ resource "aws_lambda_function" "get_order_status" {
   function_name    = "${local.name_prefix}-get-order-status"
   role             = aws_iam_role.get_order_status.arn
   handler          = "getOrderStatus.handler"
-  runtime          = "nodejs20.x"
+  runtime          = "nodejs22.x"
   filename         = data.archive_file.get_order_status.output_path
   source_code_hash = data.archive_file.get_order_status.output_base64sha256
   timeout          = 10
@@ -96,7 +96,7 @@ resource "aws_lambda_function" "process_order" {
   function_name    = "${local.name_prefix}-process-order"
   role             = aws_iam_role.process_order.arn
   handler          = "processOrder.handler"
-  runtime          = "nodejs20.x"
+  runtime          = "nodejs22.x"
   filename         = data.archive_file.process_order.output_path
   source_code_hash = data.archive_file.process_order.output_base64sha256
   timeout          = 15
@@ -119,7 +119,7 @@ resource "aws_lambda_function" "handle_failed_order" {
   function_name    = "${local.name_prefix}-handle-failed-order"
   role             = aws_iam_role.handle_failed_order.arn
   handler          = "handleFailedOrder.handler"
-  runtime          = "nodejs20.x"
+  runtime          = "nodejs22.x"
   filename         = data.archive_file.handle_failed_order.output_path
   source_code_hash = data.archive_file.handle_failed_order.output_base64sha256
   timeout          = 10

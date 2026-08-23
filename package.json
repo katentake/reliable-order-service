@@ -5,12 +5,12 @@
   "description": "Reliable order-ingestion service for restaurants (Palona AI take-home exercise)",
   "scripts": {
     "typecheck": "tsc -p app",
-    "bundle": "esbuild app/src/handlers/submitOrder.ts app/src/handlers/getOrderStatus.ts app/src/handlers/processOrder.ts app/src/handlers/handleFailedOrder.ts --bundle --minify --platform=node --target=node20 --format=cjs --outdir=app/dist",
+    "bundle": "esbuild app/src/handlers/submitOrder.ts app/src/handlers/getOrderStatus.ts app/src/handlers/processOrder.ts app/src/handlers/handleFailedOrder.ts --bundle --minify --platform=node --target=node22 --format=cjs --outdir=app/dist",
     "build": "npm run typecheck && npm run bundle",
     "test": "vitest run"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.687.0",
