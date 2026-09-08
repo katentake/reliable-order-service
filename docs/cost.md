@@ -24,13 +24,18 @@ sustained load testing), this is effectively a **free-tier / near-$0 workload**:
 | API Gateway (HTTP API) | $1.00 / million requests | ~$0 (thousands of requests, not millions) |
 | DynamoDB (on-demand) | Free tier: 25 GB storage, 2.5M read/write units/month | $0 |
 | SQS | Free tier: 1M requests/month | $0 |
-| CloudWatch Logs/Alarms/Dashboard | ~$0.30/GB ingested, $0.10/alarm/month, $3/dashboard/month | ~$3-4 |
+| CloudWatch Logs/Alarms | ~$0.30/GB ingested, first 10 alarms free | $0 |
 | SNS | Free tier: 1,000 email notifications/month | $0 |
 | S3 (Terraform state) | Negligible — one small file, versioned | ~$0.01 |
 
-**Total: roughly $3-5/month**, almost entirely the CloudWatch dashboard's flat
-$3/month fee — everything else stays inside AWS free-tier allowances at this
-traffic level.
+**Total: effectively $0/month** at this traffic level — confirmed against Cost
+Explorer, actual spend since deployment has been ~$0.00. Everything stays
+inside AWS free-tier allowances. The one deliberately-avoided line item: a
+`aws_cloudwatch_dashboard` was in an earlier iteration ($3/month flat fee,
+charged regardless of usage — the only non-usage-based cost in the whole
+stack) and was removed once the takeaway traffic didn't justify it; the 3
+alarms plus each service's own built-in CloudWatch console view give the same
+visibility without a standing charge.
 
 ## What could cause unexpected spending
 

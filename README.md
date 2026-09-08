@@ -48,7 +48,7 @@ queue, and gets recovered), see [runbook.md](docs/runbook.md#failure--recovery-d
 ## Status
 
 Complete: order submission API, async processing worker, status lookup, idempotent
-retries, DLQ + automatic FAILED-marking, CloudWatch alarms/dashboard, Terraform infra,
+retries, DLQ + automatic FAILED-marking, CloudWatch alarms, Terraform infra,
 GitHub Actions CI (test + plan on PR, test + apply on merge to main), full docs set.
 
 Incomplete / explicitly out of scope: authentication on the API, automated

@@ -54,58 +54,9 @@ resource "aws_cloudwatch_metric_alarm" "api_5xx" {
   alarm_actions       = [aws_sns_topic.alerts.arn]
 }
 
-resource "aws_cloudwatch_dashboard" "main" {
-  dashboard_name = local.name_prefix
-
-  dashboard_body = jsonencode({
-    widgets = [
-      {
-        type   = "metric"
-        x      = 0
-        y      = 0
-        width  = 12
-        height = 6
-        properties = {
-          title  = "API requests / errors"
-          region = var.aws_region
-          metrics = [
-            ["AWS/ApiGateway", "Count", "ApiId", aws_apigatewayv2_api.orders.id, { stat = "Sum", label = "Requests" }],
-            ["AWS/ApiGateway", "5xx", "ApiId", aws_apigatewayv2_api.orders.id, { stat = "Sum", label = "5xx" }],
-            ["AWS/ApiGateway", "4xx", "ApiId", aws_apigatewayv2_api.orders.id, { stat = "Sum", label = "4xx" }],
-          ]
-        }
-      },
-      {
-        type   = "metric"
-        x      = 12
-        y      = 0
-        width  = 12
-        height = 6
-        properties = {
-          title  = "Queue depth"
-          region = var.aws_region
-          metrics = [
-            ["AWS/SQS", "ApproximateNumberOfMessagesVisible", "QueueName", aws_sqs_queue.orders.name, { label = "orders queue" }],
-            ["AWS/SQS", "ApproximateNumberOfMessagesVisible", "QueueName", aws_sqs_queue.orders_dlq.name, { label = "DLQ" }],
-          ]
-        }
-      },
-      {
-        type   = "metric"
-        x      = 0
-        y      = 6
-        width  = 12
-        height = 6
-        properties = {
-          title  = "processOrder health"
-          region = var.aws_region
-          metrics = [
-            ["AWS/Lambda", "Invocations", "FunctionName", aws_lambda_function.process_order.function_name, { stat = "Sum" }],
-            ["AWS/Lambda", "Errors", "FunctionName", aws_lambda_function.process_order.function_name, { stat = "Sum" }],
-            ["AWS/Lambda", "Duration", "FunctionName", aws_lambda_function.process_order.function_name, { stat = "Average" }],
-          ]
-        }
-      },
-    ]
-  })
-}
+# No aws_cloudwatch_dashboard here on purpose: it's the one resource in this
+# stack billed as a flat monthly fee ($3/mo) regardless of usage, rather than
+# pay-per-use like everything else. The 3 alarms above + each service's own
+# built-in CloudWatch console views (Lambda "Monitor" tab, API Gateway
+# dashboard, SQS queue metrics) cover the same visibility without a standing
+# charge. See docs/cost.md.

@@ -2,8 +2,12 @@
 
 ## Health check
 
-- **Dashboard**: `terraform output dashboard_url` — API requests/errors, queue depth
-  (main + DLQ), `processOrder` invocations/errors/duration.
+- **Alarms**: `terraform output alarms_url` — the 3 alarms (DLQ not empty,
+  processOrder errors, API 5xx). No standing dashboard (it's the one resource
+  in this stack billed as a flat fee regardless of usage — see
+  [cost.md](cost.md)); for a visual view, each service's own CloudWatch console
+  page works fine: Lambda's "Monitor" tab, the SQS queue's "Monitoring" tab,
+  API Gateway's built-in dashboard.
 - **Quick CLI check**:
   ```bash
   aws sqs get-queue-attributes --queue-url <orders_dlq_url> \

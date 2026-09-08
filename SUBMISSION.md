@@ -43,8 +43,7 @@ Full walkthrough, including the failure/recovery scenario, is in
 - Full infra as code (Terraform), reproducible from a clean checkout
 - CI/CD from GitHub via OIDC (no long-lived AWS keys in the repo): PR → build,
   test, `terraform plan`; merge to `main` → build, test, `terraform apply`
-- CloudWatch dashboard + 3 alarms (DLQ depth, Lambda errors, API 5xx) wired to
-  email via SNS
+- 3 CloudWatch alarms (DLQ depth, Lambda errors, API 5xx) wired to email via SNS
 - Cost safeguards: AWS Budget + billing alerts, API throttling, tagged
   resources, 14-day log retention
 - 10 unit tests (handler logic, mocked AWS SDK) + infra validation

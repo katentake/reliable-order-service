@@ -15,6 +15,7 @@ output "orders_dlq_url" {
   value = aws_sqs_queue.orders_dlq.url
 }
 
-output "dashboard_url" {
-  value = "https://${var.aws_region}.console.aws.amazon.com/cloudwatch/home?region=${var.aws_region}#dashboards:name=${aws_cloudwatch_dashboard.main.dashboard_name}"
+output "alarms_url" {
+  description = "CloudWatch alarms list — the three alarms wired to the alerts@ email"
+  value       = "https://${var.aws_region}.console.aws.amazon.com/cloudwatch/home?region=${var.aws_region}#alarmsV2:"
 }
