@@ -6,9 +6,10 @@ Accepts orders over HTTPS, processes them asynchronously, and lets a client poll
 status — while staying available when downstream processing is slow, failing, or the
 same order is retried.
 
-**Deployed API**: `https://a0v16odgxe.execute-api.us-east-1.amazonaws.com`
-(re-deploy with `terraform apply` produces a new URL if the API is ever destroyed and
-recreated — check `terraform output api_url` for the current one).
+**Deployed API**: the live endpoint is shared on request rather than published here,
+because the API has no authentication. After deploying your own copy
+([deployment.md](docs/deployment.md)), `terraform -chdir=infra output -raw api_url`
+prints its base URL.
 
 ## Docs
 
@@ -22,7 +23,7 @@ recreated — check `terraform output api_url` for the current one).
 ## Try it
 
 ```bash
-API_URL=https://a0v16odgxe.execute-api.us-east-1.amazonaws.com
+API_URL=$(terraform -chdir=infra output -raw api_url)
 ORDER_ID=$(uuidgen | tr 'A-Z' 'a-z')
 
 # Submit an order

@@ -1,13 +1,13 @@
 # Submission — Reliable Order Processing Service
 
-**Repository**: https://github.com/katentake/reliable-order-service (private)
+**Repository**: https://github.com/katentake/reliable-order-service
 
-**Deployed API**: `https://a0v16odgxe.execute-api.us-east-1.amazonaws.com`
+**Deployed API**: shared on request (the API has no authentication, so the URL is not published)
 
 ## Testing it
 
 ```bash
-API_URL=https://a0v16odgxe.execute-api.us-east-1.amazonaws.com
+API_URL=$(terraform -chdir=infra output -raw api_url)
 ORDER_ID=$(uuidgen | tr 'A-Z' 'a-z')
 
 # Submit an order
